@@ -6,42 +6,90 @@
         xmlns:local="clr-namespace:WpfApp"
         mc:Ignorable="d"
         Title="Snake!!!" Height="480" Width="400">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="CustomButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="Black" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <StackPanel>
-            <TextBlock Name="TextBlockMain" TextAlignment="Center" Margin="0, 20, 5, 0" Width="300" Height="80" FontFamily="Narkisim" FontSize="70" FontStyle="Oblique" Foreground="Green" FontWeight="ExtraBold" Text="SNAKE">
-            </TextBlock>
-            <Button Name="buttonPlay" Click="buttonPlay_Click" Width="300" Height="50" Margin="0,0,0,0" FontFamily="Lucida Sans" FontSize="30" FontWeight="Medium" Background="Green">
+        <StackPanel Background="#33302f">
+            <Canvas Margin="44,0,0,0">
+                <TextBlock Name="TextBlockShadow" TextAlignment="Center" Margin="5, 20, 5, 0" Width="300" Height="80" FontFamily="Narkisim" FontSize="70" FontStyle="Oblique" Foreground="Black" FontWeight="ExtraBold" Text="SNAKE">
+                </TextBlock>
+                <TextBlock Name="TextBlockMain" TextAlignment="Center" Margin="0, 20, 5, 0" Width="300" Height="80" FontFamily="Narkisim" FontSize="70" FontStyle="Oblique" Foreground="Green" FontWeight="ExtraBold" Text="SNAKE">
+                </TextBlock>
+            </Canvas>
+            <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonPlay" Click="buttonPlay_Click" Width="300" Height="50" Margin="0,100,0,0" FontFamily="Lucida Sans" FontSize="30" FontWeight="Medium" Background="Green">
                 <AccessText Text="Play : [_E]"/>
             </Button>
-            <TextBlock Name="TextBlock1" Margin="0, 0, 0, 0" Width="115" Height="20" FontWeight="Medium" Text="Game Speed: Normal"/>
+            <TextBlock Name="TextBlock1" Margin="0, 0, 0, 0" Width="115" Height="20" FontWeight="Medium" Foreground="Gray" Text="Game Speed: Normal"/>
             <DockPanel>
-                <Button Name="buttonNormal" Click="buttonNormal_Click" Width="100" Height="20" Margin="95,0,0,0" FontWeight="Medium" Background="Gray">
+                <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonNormal" Click="buttonNormal_Click" Width="100" Height="20" Margin="95,0,0,0" FontWeight="Medium" Background="Green">
                     <AccessText Text="Normal : [_1]"/>
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Style.Triggers>
-                                <Trigger Property="IsPressed" Value="True">
-                                    <Setter Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect BlurRadius="20" ShadowDepth="0" Color="DarkBlue"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
                 </Button>
-                <Button Name="buttonFast" HorizontalAlignment="Right" Click="buttonFast_Click" Width="100" Height="20" Margin="0,0,95,0" FontWeight="Medium" Background="Gray">
+                <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonFast" HorizontalAlignment="Right" Click="buttonFast_Click" Width="100" Height="20" Margin="0,0,95,0" FontWeight="Medium" Background="Gray">
                     <AccessText Text="Fast: [_2]"/>
                 </Button>
             </DockPanel>
-            <Button Name="buttonControls" Click="buttonControls_Click" Width="250" Height="40" Margin="0,30,0,0" FontSize="25" FontWeight="Medium" Background="Gray">
+            <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonControls" Click="buttonControls_Click" Width="250" Height="40" Margin="0,30,0,0" FontSize="25" FontWeight="Medium" Background="Gray">
                 <AccessText Text="Controls : [_C]"/>
             </Button>
-            <Button Name="buttonCredits" Click="buttonCredits_Click" Width="250" Height="40" Margin="0,30,0,0" FontSize="25" FontWeight="Medium" Background="Gray">
+            <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonCredits" Click="buttonCredits_Click" Width="250" Height="40" Margin="0,30,0,0" FontSize="25" FontWeight="Medium" Background="Gray">
                 <AccessText Text="Credits : [_Z]"/>
             </Button>
-            <Button Name="buttonExit" Click="buttonExit_Click" Width="250" Height="35" Margin="0,30,0,0" FontSize="25" FontWeight="Medium" Background="Gray">
+            <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonExit" Click="buttonExit_Click" Width="250" Height="35" Margin="0,30,0,0" FontSize="25" FontWeight="Medium" Background="Gray">
                 <AccessText Text="Quit : [_Q]"/>
             </Button>
         </StackPanel>

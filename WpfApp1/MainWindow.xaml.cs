@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 using ClassLibrary;
 
 namespace WpfApp
@@ -21,11 +22,15 @@ namespace WpfApp
         {
             s.setSpeed(1);
             TextBlock1.Text = "Game Speed: Normal";
+            buttonNormal.Background = new SolidColorBrush(Colors.Green);
+            buttonFast.Background = new SolidColorBrush(Colors.Gray);
         }
         private void buttonFast_Click(object sender, RoutedEventArgs e)
         {
             s.setSpeed(2);
             TextBlock1.Text = "Game Speed: Fast";
+            buttonNormal.Background = new SolidColorBrush(Colors.Gray);
+            buttonFast.Background = new SolidColorBrush(Colors.Green);
         }
 
         private void buttonExit_Click(object sender, RoutedEventArgs e)
