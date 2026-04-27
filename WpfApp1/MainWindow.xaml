@@ -64,22 +64,24 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <StackPanel Background="#33302f">
-            <Canvas Margin="44,0,0,0">
-                <TextBlock Name="TextBlockShadow" TextAlignment="Center" Margin="5, 20, 5, 0" Width="300" Height="80" FontFamily="Narkisim" FontSize="70" FontStyle="Oblique" Foreground="Black" FontWeight="ExtraBold" Text="SNAKE">
-                </TextBlock>
-                <TextBlock Name="TextBlockMain" TextAlignment="Center" Margin="0, 20, 5, 0" Width="300" Height="80" FontFamily="Narkisim" FontSize="70" FontStyle="Oblique" Foreground="Green" FontWeight="ExtraBold" Text="SNAKE">
-                </TextBlock>
-            </Canvas>
-            <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonPlay" Click="buttonPlay_Click" Width="300" Height="50" Margin="0,100,0,0" FontFamily="Lucida Sans" FontSize="30" FontWeight="Medium" Background="Green">
+        <StackPanel Name="BaseElement" Background="#33302f">
+            <DockPanel >
+                <Canvas Margin="0,20,0,20" HorizontalAlignment="Center" Width="300" Height="70">
+                    <TextBlock Name="TextBlockShadow" TextAlignment="Center" Margin="0, 0, 0, 0" Width="300" Height="80" FontFamily="Narkisim" FontSize="80" FontStyle="Oblique" Foreground="Black" FontWeight="ExtraBold" Text="SNAKE">
+                    </TextBlock>
+                    <TextBlock Name="TextBlockMain" TextAlignment="Center" Margin="-5, 0, 0, 0" Width="300" Height="80" FontFamily="Narkisim" FontSize="80" FontStyle="Oblique" Foreground="Green" FontWeight="ExtraBold" Text="SNAKE">
+                    </TextBlock>
+                </Canvas>
+            </DockPanel>
+            <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonPlay" Click="buttonPlay_Click" Width="300" Height="50" Margin="0,0,0,0" FontFamily="Lucida Sans" FontSize="30" FontWeight="Medium" Background="Green">
                 <AccessText Text="Play : [_E]"/>
             </Button>
             <TextBlock Name="TextBlock1" Margin="0, 0, 0, 0" Width="115" Height="20" FontWeight="Medium" Foreground="Gray" Text="Game Speed: Normal"/>
-            <DockPanel>
-                <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonNormal" Click="buttonNormal_Click" Width="100" Height="20" Margin="95,0,0,0" FontWeight="Medium" Background="Green">
+            <DockPanel HorizontalAlignment="Center">
+                <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonNormal" Click="buttonNormal_Click" Width="100" Height="20" Margin="0,0,10,0" FontWeight="Medium" Background="Green">
                     <AccessText Text="Normal : [_1]"/>
                 </Button>
-                <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonFast" HorizontalAlignment="Right" Click="buttonFast_Click" Width="100" Height="20" Margin="0,0,95,0" FontWeight="Medium" Background="Gray">
+                <Button Style="{DynamicResource CustomButtonStyle}" Name="buttonFast" HorizontalAlignment="Right" Click="buttonFast_Click" Width="100" Height="20" Margin="10,0,0,0" FontWeight="Medium" Background="Gray">
                     <AccessText Text="Fast: [_2]"/>
                 </Button>
             </DockPanel>
