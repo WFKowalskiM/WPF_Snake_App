@@ -24,7 +24,8 @@ and also the game view,
 ![Screenshot of the app's functioning. Shows the WPF game](WpfApp1/assets/image_3.png)
 
 ### Game Details
-The game is as easy to understand as it is well-known, 
-it's goal is to accumulate length by moving around the "map" area,
-accomplished by consuming surrounding objects, while avoiding the game-over scenario,
-which occurs when the "head" of the player's avatar meets any other point along it's body.
+This game is as easy to understand as it is well-known. 
+The goal is to accumulate length by moving around the "map" area,
+which is accomplished by consuming surrounding objects. The user must also avoid two game-over scenarios:
+one occurs when the "head" of the player's avatar meets any other point along it's body,
+the other similarly concerns the head, ending the game when it leaves the map's boundry.
